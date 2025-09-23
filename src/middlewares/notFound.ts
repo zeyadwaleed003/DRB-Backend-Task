@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
+
 import APIError from '../utils/APIError';
-import HttpStatus from '../utils/HttpStatus';
+import HttpStatus from '../utils/enums/HttpStatus';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   next(

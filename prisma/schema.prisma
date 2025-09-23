@@ -13,3 +13,45 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum DriverLicenseType {
+  A
+  B
+  C
+  D
+  E
+}
+
+enum RouteStatus {
+  UNASSIGNED
+  ASSIGNED
+  FINISHED
+}
+
+model Driver {
+  id           String            @id @default(uuid())
+  name         String            @db.VarChar(32)
+  licenseType  DriverLicenseType
+  availability Boolean           @default(true)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @default(now()) @updatedAt
+  Route        Route[]
+}
+
+model Route {
+  id            String      @id @default(uuid())
+  startLocation String      @db.VarChar(30)
+  startLong     Float
+  startLat      Float
+  endLocation   String      @db.VarChar(30)
+  endLong       Float
+  endLat        Float
+  distance      Decimal
+  estimatedTime Int
+  status        RouteStatus @default(UNASSIGNED)
+  createdAt     DateTime    @default(now())
+  driverId      String?
+  driver        Driver?     @relation(fields: [driverId], references: [id])
+
+  @@index([status])
+}

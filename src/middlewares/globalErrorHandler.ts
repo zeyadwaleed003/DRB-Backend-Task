@@ -7,11 +7,13 @@ import {
 
 import env from '../config/env';
 import APIError from '../utils/APIError';
-import HttpStatus from '../utils/HttpStatus';
+import HttpStatus from '../utils/enums/HttpStatus';
+import ResponseStatus from '../utils/enums/ResponseStatus';
 
 const sendErrorDev = (err: any, res: Response) => {
-  res.status(err.statusCode).json({
-    status: err.status,
+  const statusCode = err.statusCode || HttpStatus.InternalServerError;
+  res.status(statusCode).json({
+    status: err.status || 500,
     message: err.message,
     stack: err.stack,
   });
@@ -25,7 +27,7 @@ const sendErrorProd = (err: APIError | unknown, res: Response) => {
     });
 
   return res.status(HttpStatus.InternalServerError).json({
-    status: 'error',
+    status: ResponseStatus.ERROR,
     message: 'Something went wrong, Please try again later.',
   });
 };

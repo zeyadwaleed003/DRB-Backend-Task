@@ -2,12 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 
 import { APIResponse } from '../types/api.types';
 import sendResponse from '../utils/sendResponse';
-import HttpStatus from '../utils/HttpStatus';
+import HttpStatus from '../utils/enums/HttpStatus';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   const result: APIResponse = {
     status: 'OK',
-    statusCode: HttpStatus.OK,
+    statusCode: HttpStatus.Ok,
     message: `Health check passed - API is operational`,
     timestamp: new Date().toISOString(),
   };

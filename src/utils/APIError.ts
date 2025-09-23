@@ -1,3 +1,5 @@
+import ResponseStatus from './enums/ResponseStatus';
+
 class APIError extends Error {
   isOperational: boolean;
   statusCode: number;
@@ -7,7 +9,9 @@ class APIError extends Error {
     super(message);
 
     this.statusCode = statusCode;
-    this.status = this.statusCode.toString().startsWith('4') ? 'fail' : 'error';
+    this.status = this.statusCode.toString().startsWith('4')
+      ? ResponseStatus.FAIL
+      : ResponseStatus.ERROR;
     this.isOperational = true;
 
     Error.captureStackTrace(this, this.constructor);
