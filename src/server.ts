@@ -1,4 +1,5 @@
 import app from './app';
+import jobs from './jobs';
 import env from './config/env';
 import logger from './config/logger';
 
@@ -9,6 +10,7 @@ process.on('uncaughtException', (err) => {
 
 const server = app.listen(3000, () => {
   logger.info(`Server is running on port: ${env.PORT}`);
+  jobs();
 });
 
 process.on('unhandledRejection', (err) => {

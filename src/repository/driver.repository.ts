@@ -9,6 +9,23 @@ class DriverRepository {
       data,
     });
   }
+
+  async findAvailableDrivers() {
+    return await this.driver.findMany({
+      where: {
+        availability: true,
+      },
+    });
+  }
+
+  async markDriverUnavailable(id: string) {
+    await this.driver.update({
+      where: { id },
+      data: {
+        availability: false,
+      },
+    });
+  }
 }
 
 export default new DriverRepository();

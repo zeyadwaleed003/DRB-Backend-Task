@@ -14,6 +14,24 @@ class RoutesRepository {
   async find(options: Prisma.RouteFindManyArgs) {
     return await this.route.findMany(options);
   }
+
+  async findUnassignedRoutes() {
+    return await this.route.findMany({
+      where: {
+        status: 'UNASSIGNED',
+      },
+    });
+  }
+
+  async assignRoute(routeId: string, driverId: string) {
+    await this.route.update({
+      where: { id: routeId },
+      data: {
+        status: 'ASSIGNED',
+        driverId: driverId,
+      },
+    });
+  }
 }
 
 export default new RoutesRepository();
