@@ -19,12 +19,13 @@ class DriverService {
   }
 
   async getSchedule(): Promise<APIResponse> {
-    const routes = await driverRepository.getSchedule();
+    const data = await driverRepository.getSchedule();
 
     const result: APIResponse = {
       status: ResponseStatus.SUCCESS,
-      statusCode: HttpStatus.Created,
-      data: routes,
+      statusCode: HttpStatus.Ok,
+      size: data.length,
+      data,
     };
 
     return result;
@@ -38,6 +39,19 @@ class DriverService {
       status: ResponseStatus.SUCCESS,
       statusCode: HttpStatus.Ok,
       message: 'Trip finished successfully',
+    };
+
+    return result;
+  }
+
+  async getPastRoutes(id: string): Promise<APIResponse> {
+    const pastRoutes = await routeRepository.getPastDriverRoutes(id);
+
+    const result: APIResponse = {
+      status: ResponseStatus.SUCCESS,
+      statusCode: HttpStatus.Ok,
+      size: pastRoutes.length,
+      data: pastRoutes,
     };
 
     return result;

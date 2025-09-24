@@ -45,9 +45,6 @@ class DriverRepository {
           where: {
             status: 'ASSIGNED',
           },
-          select: {
-            id: true,
-          },
         },
       },
     });
@@ -55,9 +52,7 @@ class DriverRepository {
     return drivers.map((driver) => ({
       driverId: driver.id,
       name: driver.name,
-      routes: driver.Route.map((route) => ({
-        routeId: route.id,
-      })),
+      route: driver.Route,
     }));
   }
 }

@@ -52,6 +52,15 @@ class RoutesRepository {
         HttpStatus.NotFound
       );
   }
+
+  async getPastDriverRoutes(driverId: string) {
+    return await this.route.findMany({
+      where: {
+        driverId,
+        status: 'FINISHED',
+      },
+    });
+  }
 }
 
 export default new RoutesRepository();
