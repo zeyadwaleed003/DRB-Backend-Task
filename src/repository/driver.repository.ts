@@ -26,6 +26,31 @@ class DriverRepository {
       },
     });
   }
+
+  async getSchedule() {
+    const drivers = await this.driver.findMany({
+      select: {
+        id: true,
+        name: true,
+        Route: {
+          where: {
+            status: 'ASSIGNED',
+          },
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+
+    return drivers.map((driver) => ({
+      driverId: driver.id,
+      name: driver.name,
+      routes: driver.Route.map((route) => ({
+        routeId: route.id,
+      })),
+    }));
+  }
 }
 
 export default new DriverRepository();

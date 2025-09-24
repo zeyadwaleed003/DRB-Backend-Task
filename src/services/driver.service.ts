@@ -16,6 +16,18 @@ class DriverService {
 
     return result;
   }
+
+  async getSchedule(): Promise<APIResponse> {
+    const routes = await driverRepository.getSchedule();
+
+    const result: APIResponse = {
+      status: ResponseStatus.SUCCESS,
+      statusCode: HttpStatus.Created,
+      data: routes,
+    };
+
+    return result;
+  }
 }
 
 export default new DriverService();
