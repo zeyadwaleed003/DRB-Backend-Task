@@ -23,7 +23,7 @@ npm run build && npm start # production
 
 ## Assumptions made
 
-- **Creating a new Route**: I assumed that I will be given the longitude and the latitute of the start and the end location, this would be beneficail to calculate the distance and the estimated time in my api (ofcourse this could be given by the client as well). To calculate the estimated time I assumed that the app is built for a small city which the average car speed is 50 km/h. I will be given the names of the start and the end location for more human readable info.
+**Creating a new Route**: I assumed that I will be given the longitude and latitude of the start and end locations. This would be beneficial for calculating the distance and estimated time in my API (although this could also be provided by the client). To calculate the estimated time, I assumed that the app is built for a small city where the average car speed is 50 km/h. I will also be given the names of the start and end locations for more human-readable information.
 
 ## Features Implemented
 
