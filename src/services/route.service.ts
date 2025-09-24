@@ -48,7 +48,7 @@ class RoutesService {
     return result;
   }
 
-  async getRoutes(queryString: QueryString) {
+  async getRoutes(queryString: QueryString): Promise<APIResponse> {
     const routes = await routeRepository.find(paginate(queryString));
 
     const result: APIResponse = {

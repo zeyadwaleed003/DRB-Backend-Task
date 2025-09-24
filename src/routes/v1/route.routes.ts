@@ -12,4 +12,4 @@ router
   .get(validate(PaginationSchema), getRoutes)
   .post(validate(CreateRouteSchema), createRoute);
 
-export const routesRoutes = router;
+export const routeRoutes = router;
