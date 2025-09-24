@@ -27,6 +27,15 @@ class DriverRepository {
     });
   }
 
+  async markDriverAvailable(id: string) {
+    await this.driver.update({
+      where: { id },
+      data: {
+        availability: true,
+      },
+    });
+  }
+
   async getSchedule() {
     const drivers = await this.driver.findMany({
       select: {

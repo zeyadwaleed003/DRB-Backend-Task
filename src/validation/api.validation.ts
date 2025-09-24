@@ -6,3 +6,11 @@ export const PaginationSchema = z.object({
     limit: z.coerce.number().int().min(1).max(100).default(100),
   }),
 });
+
+export const IdSchema = z.object({
+  params: z
+    .object({
+      id: z.uuid('Provided id must be in valid UUID format'),
+    })
+    .strict(),
+});

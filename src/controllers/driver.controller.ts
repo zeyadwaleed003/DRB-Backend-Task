@@ -11,3 +11,12 @@ export const getSchedule: RequestHandler = async (req, res, next) => {
   const result = await driverService.getSchedule();
   sendResponse(res, result);
 };
+
+export const finishTrip: RequestHandler<{ id: string }> = async (
+  req,
+  res,
+  next
+) => {
+  const result = await driverService.finishTrip(req.params.id);
+  sendResponse(res, result);
+};
