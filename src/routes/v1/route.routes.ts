@@ -1,11 +1,15 @@
 import { Router } from 'express';
 
 import validate from '../../middlewares/validate';
-import { createRoute } from '../../controllers/route.controller';
+import { PaginationSchema } from '../../validation/api.validation';
 import { CreateRouteSchema } from '../../validation/route.validation';
+import { createRoute, getRoutes } from '../../controllers/route.controller';
 
 const router = Router();
 
-router.route('/').post(validate(CreateRouteSchema), createRoute);
+router
+  .route('/')
+  .get(validate(PaginationSchema), getRoutes)
+  .post(validate(CreateRouteSchema), createRoute);
 
 export const routesRoutes = router;

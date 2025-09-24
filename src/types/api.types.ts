@@ -8,3 +8,8 @@ export type APIResponse = {
   timestamp?: string;
   size?: number;
 };
+
+export type QueryString = {
+  limit?: string;
+  page?: string;
+};

@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import prisma from '../config/prisma';
 import { Route } from '../types/route.types';
 
@@ -8,6 +9,10 @@ class RoutesRepository {
     return await this.route.create({
       data,
     });
+  }
+
+  async find(options: Prisma.RouteFindManyArgs) {
+    return await this.route.findMany(options);
   }
 }
 

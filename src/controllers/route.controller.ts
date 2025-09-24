@@ -7,3 +7,8 @@ export const createRoute: RequestHandler = async (req, res, next) => {
   const result = await routeService.createRoute(req.body);
   sendResponse(res, result);
 };
+
+export const getRoutes: RequestHandler = async (req, res, next) => {
+  const result = await routeService.getRoutes(req.query);
+  sendResponse(res, result);
+};

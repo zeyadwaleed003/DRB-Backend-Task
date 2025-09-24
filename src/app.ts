@@ -1,3 +1,4 @@
+import qs from 'qs';
 import morgan from 'morgan';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
@@ -15,6 +16,8 @@ const limiter = rateLimit({
 });
 
 const app = express();
+
+app.set('query parser', (str: string) => qs.parse(str));
 
 app.use(limiter);
 

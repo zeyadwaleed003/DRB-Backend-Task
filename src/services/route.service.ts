@@ -1,8 +1,9 @@
-import { APIResponse } from '../types/api.types';
+import { APIResponse, QueryString } from '../types/api.types';
 import HttpStatus from '../utils/enums/HttpStatus';
 import ResponseStatus from '../utils/enums/ResponseStatus';
 import routeRepository from '../repository/route.repository';
 import { CreateRouteBody, Route } from '../types/route.types';
+import paginate from '../utils/paginate';
 
 class RoutesService {
   private avgSpeed = 50;
@@ -42,6 +43,19 @@ class RoutesService {
       status: ResponseStatus.SUCCESS,
       statusCode: HttpStatus.Created,
       data: route,
+    };
+
+    return result;
+  }
+
+  async getRoutes(queryString: QueryString) {
+    const routes = await routeRepository.find(paginate(queryString));
+
+    const result: APIResponse = {
+      status: ResponseStatus.SUCCESS,
+      statusCode: HttpStatus.Ok,
+      size: routes.length,
+      data: routes,
     };
 
     return result;
