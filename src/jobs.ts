@@ -4,14 +4,13 @@ import logger from './config/logger';
 import routeRepository from './repository/route.repository';
 import driverRepository from './repository/driver.repository';
 
-// Automatically assign unassigned routes to available drivers every minute
+// Automatically assign unassigned routes to available drivers every 30 seconds
 export default () =>
-  scheduleJob('0 * * * * *', async () => {
+  scheduleJob('*/30 * * * * *', async () => {
     try {
       logger.info('Starting route assignment job');
 
       const unassignedRoutes = await routeRepository.findUnassignedRoutes();
-
       const availableDrivers = await driverRepository.findAvailableDrivers();
 
       const assignmentsToMake = Math.min(
@@ -24,7 +23,6 @@ export default () =>
         const driver = availableDrivers[i];
 
         await routeRepository.assignRoute(route!.id, driver!.id);
-
         await driverRepository.markDriverUnavailable(driver!.id);
 
         logger.info(
