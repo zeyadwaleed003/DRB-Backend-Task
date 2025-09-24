@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: .
+      target: production
+    container_name: drb-prod
+    environment:
+      - NODE_ENV=production
